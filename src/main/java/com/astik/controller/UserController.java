@@ -58,8 +58,8 @@ public class UserController {
     @PostMapping("/transfer")
     public ResponseEntity<String> transfer(@AuthenticationPrincipal UserDetails userDetails, @RequestBody TransactionRequest req) 
     {
-    	userService.transfer(userDetails.getUsername(), req);
-    	return ResponseEntity.ok("Transfer successful");
+    	String result=userService.transfer(userDetails.getUsername(), req);
+    	return ResponseEntity.ok(result);
     }
     
     @PostMapping("/deposit")

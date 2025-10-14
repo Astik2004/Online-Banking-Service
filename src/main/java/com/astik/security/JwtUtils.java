@@ -7,6 +7,8 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
 
+import com.astik.exception.JWTException;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -48,6 +50,13 @@ public class JwtUtils {
 
     public boolean validateToken(String token, String userId) {
         String userIdFromToken = getUserIdFromToken(token);
-        return (userId.equals(userIdFromToken) && isTokenNotExpired(token));
+        if(userId.equals(userIdFromToken) && isTokenNotExpired(token))
+        {
+        	return true;
+        }
+        else
+        {
+            throw new JWTException("Token expired or invalid");
+        }
     }
 }
